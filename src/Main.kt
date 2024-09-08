@@ -112,6 +112,47 @@ class EquilateralTriangle(name: String, private var side: Double) : Triangle(nam
 
 
 fun main() {
-    // add
+    // Create instances of each shape with default dimensions
+    val shapes: Array<Shape> = arrayOf(
+        Square("Square", 0.0),
+        Circle("Circle", 0.0),
+        Triangle("Triangle", 0.0, 0.0, 0.0),
+        EquilateralTriangle("Equilateral Triangle", 0.0)
+    )
+
+    // Prompt the user for dimensions for each shape
+    for (shape in shapes) {
+        when (shape) {
+            is Square -> {
+                print("Enter the side length for ${shape.name}: ")
+                val side = readLine()?.toDoubleOrNull() ?: 0.0
+                shape.setDimensions(side)
+            }
+            is Circle -> {
+                print("Enter the radius for ${shape.name}: ")
+                val radius = readLine()?.toDoubleOrNull() ?: 0.0
+                shape.setDimensions(radius)
+            }
+            is Triangle -> {
+                print("Enter the three sides for ${shape.name} (separated by spaces): ")
+                val sides = readLine()?.split(" ")?.map { it.toDoubleOrNull() ?: 0.0 } ?: listOf(0.0, 0.0, 0.0)
+                shape.setDimensions(sides[0], sides[1], sides[2])
+            }
+            is EquilateralTriangle -> {
+                print("Enter the side length for ${shape.name}: ")
+                val side = readLine()?.toDoubleOrNull() ?: 0.0
+                shape.setDimensions(side)
+            }
+        }
+    }
+
+    // Print the name, dimensions, and area of each shape
+    for (shape in shapes) {
+        println()
+        println("Shape: ${shape.name}")
+        shape.printDimensions()
+        println("Area: ${shape.getArea()}")
+    }
 }
+
 
